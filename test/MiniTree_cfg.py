@@ -7,7 +7,8 @@ options = VarParsing('analysis')
 
 options.outputFile = 'miniTree.root'
 #options.inputFiles= '/store/mc/RunIIFall17MiniAOD/WZ_TuneCP5_13TeV-pythia8/MINIAODSIM/94X_mc2017_realistic_v10-v1/60000/1C7C7FB8-14E6-E711-90A9-0025905A60FE.root' # WZ
-options.inputFiles = '/store/data/Run2017F/SingleMuon/MINIAOD/17Nov2017-v1/010000/183BE17C-A5EC-E711-8F69-0025905A607E.root' # ReReco
+#options.inputFiles = '/store/data/Run2017F/SingleMuon/MINIAOD/17Nov2017-v1/010000/183BE17C-A5EC-E711-8F69-0025905A607E.root' # ReReco
+options.inputFiles = 'file:/afs/cern.ch/user/a/anirban/afswork/gen_prod/TCP/CMSSW_9_4_4/src/TCP30_RunIIFall17wmLHEGS_step2_step3.root'
 options.maxEvents = -1
 options.register('skipEvents', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "Events to skip")
 options.register('reportEvery', 100, VarParsing.multiplicity.singleton, VarParsing.varType.int, "Report every")
@@ -15,6 +16,7 @@ options.register('isMC', 0, VarParsing.multiplicity.singleton, VarParsing.varTyp
 options.register('reHLT', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "Sample is reHLT")
 options.register('runMetFilter', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "Run the recommended MET filters")
 options.register('crab', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "Make changes needed for crab")
+options.register('debug', 0, VarParsing.multiplicity.singleton, VarParsing.varType.bool, "Dump python cfg file for debugging")
 
 options.parseArguments()
 
@@ -332,4 +334,4 @@ for f in filters:
 process.miniTreePath += process.miniTree
 process.schedule.append(process.miniTreePath)
 
-open('dump.py', 'w').write(process.dumpPython())
+if options.debug: open('dump.py', 'w').write(process.dumpPython())
