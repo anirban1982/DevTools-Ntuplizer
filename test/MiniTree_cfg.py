@@ -96,7 +96,10 @@ process.MessageLogger.cerr.FwkReport.reportEvery = options.reportEvery
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
 
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(options.inputFiles),
+    fileNames = cms.untracked.vstring(
+      '/store/data/Run2017F/JetHT/MINIAOD/17Nov2017-v1/50000/A668D809-A0DF-E711-A5A5-001E677924CE.root', 
+      '/store/data/Run2017F/JetHT/MINIAOD/17Nov2017-v1/50000/348B51A9-9FDF-E711-95F6-001E677926C2.root', 
+      ),
     skipEvents = cms.untracked.uint32(options.skipEvents),
 )
 
@@ -331,3 +334,5 @@ for f in filters:
     process.miniTreePath += cms.ignore(f)
 process.miniTreePath += process.miniTree
 process.schedule.append(process.miniTreePath)
+
+open('dump.py', 'w').write(process.dumpPython())

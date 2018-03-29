@@ -2,6 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 def customizeJets(process,coll,srcLabel='jets',postfix='',**kwargs):
     '''Customize jets'''
+    reHLT = kwargs.pop('reHLT',False)
     isMC = kwargs.pop('isMC',False)
     reHLT = kwargs.pop('reHLT',False)
     jSrc = coll[srcLabel]
@@ -57,6 +58,32 @@ def customizeJets(process,coll,srcLabel='jets',postfix='',**kwargs):
         discriminator = cms.string('pileupJetId:fullDiscriminant'),
     )
     modName = 'jID{0}'.format(postfix)
+    setattr(process,modName,module)
+    jSrc = modName
+
+    path *= getattr(process,modName)
+
+    ##############################
+    ### embed trigger matching ###
+    ##############################
+    labels = []
+    paths = []
+    from triggers import triggerMap
+    for trigger in triggerMap:
+        if 'jet' in triggerMap[trigger]['objects']:
+            labels += ['matches_{0}'.format(trigger)]
+            paths += [triggerMap[trigger]['path']]
+    module = cms.EDProducer(
+        "JetHLTMatchEmbedder",
+        src = cms.InputTag(jSrc),
+        #triggerResults = cms.InputTag('TriggerResults', '', 'HLT'),
+        triggerResults = cms.InputTag('TriggerResults', '', 'HLT2') if reHLT else cms.InputTag('TriggerResults', '', 'HLT'),
+        triggerObjects = cms.InputTag("slimmedPatTrigger"),
+        deltaR = cms.double(0.4),
+        labels = cms.vstring(*labels),
+        paths = cms.vstring(*paths),
+    )
+    modName = 'jTrig{0}'.format(postfix)
     setattr(process,modName,module)
     jSrc = modName
 

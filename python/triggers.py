@@ -1,5 +1,7 @@
 triggerMap = {
     # name : {'path': pathString, 'objects': [objects]},
+    # Single jet
+    'PFJet450'  : {'path' : 'HLT_PFJet450_v\\[0-9]+', 'objects': ['jet',], }, 
     # single muon
     'Mu8_TrkIsoVVL'                                        : {'path' : 'HLT_Mu8_TrkIsoVVL_v\\[0-9]+',                                     'objects' : ['muon'], }, # prescaled always
     'Mu17_TrkIsoVVL'                                       : {'path' : 'HLT_Mu17_TrkIsoVVL_v\\[0-9]+',                                    'objects' : ['muon'], }, # prescaled always
@@ -47,7 +49,7 @@ triggerMap = {
     # double muon
     #'Mu17_TrkIsoVVL_Mu8_TrkIsoVVL'                         : {'path' : 'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v\\[0-9]+',                      'objects' : ['muon'], }, # prescaled
     #'Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL'                       : {'path' : 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v\\[0-9]+',                    'objects' : ['muon'], }, # prescaled
-    'Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ'                      : {'path' : 'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v\\[0-9]+',                   'objects' : ['muon'], },
+'Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ'                      : {'path' : 'HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v\\[0-9]+',                   'objects' : ['muon'], },
     'Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ'                    : {'path' : 'HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v\\[0-9]+',                 'objects' : ['muon'], },
     # double electron
     #'Ele17_Ele12_CaloIdL_TrackIdL_IsoVL'                   : {'path' : 'HLT_Ele17_Ele12_CaloIdL_TrackIdL_IsoVL_v\\[0-9]+',                'objects' : ['electron'], }, # prescaled
