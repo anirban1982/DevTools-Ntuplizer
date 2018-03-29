@@ -2,7 +2,6 @@ import FWCore.ParameterSet.Config as cms
 
 def customizeJets(process,coll,srcLabel='jets',postfix='',**kwargs):
     '''Customize jets'''
-    reHLT = kwargs.pop('reHLT',False)
     isMC = kwargs.pop('isMC',False)
     reHLT = kwargs.pop('reHLT',False)
     jSrc = coll[srcLabel]
